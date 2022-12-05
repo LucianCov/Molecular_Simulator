@@ -3,6 +3,7 @@
 
 #include "ParticleSystemBase.hpp"
 #include "Spring.hpp"
+#include "LennardJones.hpp"
 
 namespace GLOO {
 class LennardJonesSystem : ParticleSystemBase {
@@ -11,6 +12,9 @@ class LennardJonesSystem : ParticleSystemBase {
     std::vector<Spring> springs_;
     std::vector<bool> fixed_;
 
+    void Set_Force_Model(float epsilon, float r_min) {
+        force_model_ = LennardJones(epsilon, r_min);
+    }
 
     void AddParticle(float mass){
         masses_.emplace_back(mass);
@@ -33,10 +37,12 @@ class LennardJonesSystem : ParticleSystemBase {
     ParticleState ComputeTimeDerivative(const ParticleState& state, float time) const{
         ParticleState derivative = ParticleState();
 
-        // derivative = CalcForce(state);
+        // force can be retrieved with force_model_.CalcForce(glm::vec3 pos1, glm::vec3 pos2)
 
         return derivative;
     }
+ private:
+    LennardJones force_model_ = LennardJones();
 };
 }  // namespace GLOO
 

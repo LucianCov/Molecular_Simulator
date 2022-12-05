@@ -1,6 +1,11 @@
 #include "LennardJones.hpp"
 
 namespace GLOO {
+    LennardJones::LennardJones() {
+        epsilon_ = 1.0;
+        r_min_ = 0.5;
+    }
+
     LennardJones::LennardJones(float epsilon, float r_min) :
      epsilon_(epsilon), r_min_(r_min) {
     }
