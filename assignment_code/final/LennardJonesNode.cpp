@@ -23,13 +23,13 @@ namespace GLOO {
     integrator_ = IntegratorFactory::CreateIntegrator<LennardJonesSystem, ParticleState>(type);
     system_ = LennardJonesSystem();
     
-    system_.AddParticle(masses[0]);
-    for (size_t i = 1; i < state_.positions.size(); i++){
+    // system_.AddParticle(masses[0]);
+    for (size_t i = 0; i < state_.positions.size(); i++){
         //need to initialize the system by adding masses and springs
         system_.AddParticle(masses[i]);
-        system_.AddSpring(50.0, 0.6, i-1, i);
+        // system_.AddSpring(50.0, 0.6, i-1, i);
     }
-    system_.FixParticle(0);
+    // system_.FixParticle(0);
 
     Initialize();
 }

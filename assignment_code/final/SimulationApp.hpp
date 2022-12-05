@@ -8,6 +8,7 @@
 #include "SimpleParticleNode.hpp"
 #include "PendulumNode.hpp"
 #include "ClothNode.hpp"
+#include "LennardJonesNode.hpp"
 
 namespace GLOO {
 class SimulationApp : public Application {
@@ -21,9 +22,10 @@ class SimulationApp : public Application {
  private:
   IntegratorType integrator_type_;
   float integration_step_;
-  SimpleParticleNode* simple_particle_node_;
-  PendulumNode* pendulum_node_;
-  ClothNode* cloth_node_;
+  // SimpleParticleNode* simple_particle_node_;
+  // PendulumNode* pendulum_node_;
+  // ClothNode* cloth_node_;
+  LennardJonesNode* m_sim_node_;
 };
 }  // namespace GLOO
 

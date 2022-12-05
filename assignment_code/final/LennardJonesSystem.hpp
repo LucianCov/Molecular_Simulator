@@ -18,7 +18,7 @@ class LennardJonesSystem : ParticleSystemBase {
 
     void AddParticle(float mass){
         masses_.emplace_back(mass);
-        fixed_.push_back(false);
+        // fixed_.push_back(false);
     }
 
     void AddSpring(float spring_const, float rest_length, int point1, int point2){
