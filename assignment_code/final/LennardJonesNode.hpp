@@ -16,7 +16,7 @@
 namespace GLOO {
 class LennardJonesNode : public SceneNode {
  public:
-  LennardJonesNode(ParticleState initial_state, const std::vector<float>& masses, IntegratorType type, float step_size);
+  LennardJonesNode(ParticleState initial_state, const std::vector<float>& masses, const std::vector<glm::vec3>& colors, IntegratorType type, float step_size);
 
   void Update(double delta_time) override;
 
@@ -36,6 +36,7 @@ class LennardJonesNode : public SceneNode {
     std::unique_ptr<IntegratorBase<LennardJonesSystem, ParticleState>> integrator_;
     IntegratorType integrator_type_;
     LennardJonesSystem system_;
+    std::vector<glm::vec3> colors_;
 
 };
 }  // namespace GLOO
