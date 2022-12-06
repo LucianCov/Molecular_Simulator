@@ -20,8 +20,12 @@ class ForwardEulerIntegrator : public IntegratorBase<TSystem, TState> {
     TState derivative = TState(system.ComputeTimeDerivative(state, start_time));
     // std::cout << "Derivative successfully calculated" << std::endl;
 
-    auto output = state + derivative * dt;
-    
+    TState output;
+    output.velocities = state.velocities;
+    output.positions = state.positions;
+    for (int i = 0; i < state.positions.size(); i++) {
+        output.positions[i] = state.positions[i] + state.positions[i] + derivative.velocities[i] * (dt*dt);
+    }
     return output;
   }
 };
