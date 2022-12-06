@@ -36,18 +36,21 @@ class LennardJonesSystem : ParticleSystemBase {
 
     ParticleState ComputeTimeDerivative(const ParticleState& state, float time) const{
         ParticleState derivative = ParticleState();
-        derivative.positions = state.velocities;
-        derivative.velocities = state.velocities;
-
-        // force can be retrieved with force_model_.CalcForce(glm::vec3 pos1, glm::vec3 pos2)
-
+        derivative.positions = state.velocities;        
+        std::vector<glm::vec3> accelerations;
         for (int i = 0; i < state.positions.size(); i++) {
-            glm::vec3 force = glm::vec3(0, 0, 0);
+            // for each particle initialize its total force to 0
+            glm::vec3 force = glm::vec3(0.f);
             for (int j = 0; j < state.positions.size(); j++) {
-                force += glm::normalize(state.positions[j] - state.positions[i]) * force_model_.CalcForce(state.positions[i], state.positions[j]);
+                if (i != j) {
+                    // don't want to use the point on itself
+                    force += glm::normalize(state.positions[j] - state.positions[i]) * -1.f * force_model_.CalcForce(state.positions[i], state.positions[j]);
+
+                }
             }
-            derivative.velocities[i] = force/masses_[i];
+            accelerations.push_back(force/masses_[i]);
         }
+        derivative.velocities = accelerations;
         return derivative;
     }
  private:
