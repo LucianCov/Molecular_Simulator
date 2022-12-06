@@ -2,8 +2,8 @@
 
 namespace GLOO {
     LennardJones::LennardJones() {
-        epsilon_ = 1.0;
-        r_min_ = 0.5;
+        epsilon_ = 0.2;
+        r_min_ = 0.9;
     }
 
     LennardJones::LennardJones(float epsilon, float r_min) :
