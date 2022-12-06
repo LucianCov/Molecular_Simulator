@@ -11,7 +11,7 @@ class LennardJonesSystem : ParticleSystemBase {
     std::vector<float> masses_;
     std::vector<Spring> springs_;
     std::vector<bool> fixed_;
-    float k_ = .35;
+    float k_ = .05;
 
     void Set_Force_Model(float epsilon, float r_min) {
         force_model_ = LennardJones(epsilon, r_min);

@@ -13,7 +13,7 @@
 namespace GLOO {
   LennardJonesNode::LennardJonesNode(ParticleState initial_state, const std::vector<float>& masses, IntegratorType type, float step_size)
  : SceneNode() {
-    sphere_mesh_ = PrimitiveFactory::CreateSphere(0.5f, 25, 25);
+    sphere_mesh_ = PrimitiveFactory::CreateSphere(0.05f, 25, 25);
     shader_ = std::make_shared<PhongShader>();
     segments_ = std::make_shared<VertexObject>();
     reset_ = initial_state;
@@ -23,7 +23,7 @@ namespace GLOO {
     integrator_ = IntegratorFactory::CreateIntegrator<LennardJonesSystem, ParticleState>(type);
     system_ = LennardJonesSystem();
 
-    system_.Set_Force_Model(5, 1.0);
+    system_.Set_Force_Model(0.1, 0.1);
     
     for (size_t i = 0; i < state_.positions.size(); i++){
         //need to initialize the system by adding masses and springs

@@ -55,12 +55,35 @@ void SimulationApp::SetupScene() {
 
   ParticleState initial_state_molecular = ParticleState();
   std::vector<float> molecule_masses;
-  initial_state_molecular.positions.push_back(glm::vec3(1.f, 0.f, 0.f));
-  initial_state_molecular.positions.push_back(glm::vec3(2.2f, 0.f, 0.f));
-  initial_state_molecular.velocities.push_back(glm::vec3(0.f));
-  initial_state_molecular.velocities.push_back(glm::vec3(0.f));
-  molecule_masses.push_back(0.5);
-  molecule_masses.push_back(0.5);
+  // initial_state_molecular.positions.push_back(glm::vec3(1.f, 0.f, 0.f));
+  // initial_state_molecular.positions.push_back(glm::vec3(1.2f, 0.f, 0.f));
+  // initial_state_molecular.velocities.push_back(glm::vec3(0.f));
+  // initial_state_molecular.velocities.push_back(glm::vec3(0.f));
+  // molecule_masses.push_back(0.5);
+  // molecule_masses.push_back(0.5);
+  for (float i = 1.0; i < 1.2; i += 0.1){
+    for (float j = 0.9; j < 1.2; j += 0.1) {
+      for (float k = 0.9; k < 1.2; k += 0.1) {
+        initial_state_molecular.positions.push_back(glm::vec3(i, j, k));
+        initial_state_molecular.velocities.push_back(glm::vec3(0.f));
+        molecule_masses.push_back(0.5);
+      }
+    }
+  }
+
+  for (float i = -2.2; i < -2.0; i += 0.1){
+    for (float j = 1.0; j < 1.2; j += 0.1) {
+      for (float k = 1.0; k < 1.2; k += 0.1) {
+        initial_state_molecular.positions.push_back(glm::vec3(i, j, k));
+        initial_state_molecular.velocities.push_back(glm::vec3(1.5f, 0.f, 0.f));
+        molecule_masses.push_back(0.5);
+      }
+    }
+  }
+
+  // initial_state_molecular.positions.push_back(glm::vec3(-1.f, 1.05f, 1.05f));
+  // initial_state_molecular.velocities.push_back(glm::vec3(2.f, 0.f, 0.f));
+  // molecule_masses.push_back(0.5);
 
   auto m_sim = make_unique<LennardJonesNode>(initial_state_molecular, molecule_masses, integrator_type_, integration_step_);
   m_sim_node_ = m_sim.get();
