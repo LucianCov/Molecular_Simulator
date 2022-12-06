@@ -5,9 +5,6 @@
 
 #include "IntegratorType.hpp"
 #include "IntegratorBase.hpp"
-#include "SimpleParticleNode.hpp"
-#include "PendulumNode.hpp"
-#include "ClothNode.hpp"
 #include "LennardJonesNode.hpp"
 
 namespace GLOO {

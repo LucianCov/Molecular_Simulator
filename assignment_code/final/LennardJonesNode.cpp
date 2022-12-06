@@ -50,6 +50,7 @@ void LennardJonesNode::Update(double delta_time) {
         }
         time_ += step_;
         prev_state = state_;
+        std::cout << glm::to_string(state_.positions[0]) << std::endl;
     }
     for (size_t i = 0; i < particle_nodes_.size(); i++){
         particle_nodes_[i]->GetTransform().SetPosition(state_.positions[i]);

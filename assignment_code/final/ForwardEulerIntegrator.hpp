@@ -27,6 +27,22 @@ class ForwardEulerIntegrator : public IntegratorBase<TSystem, TState> {
         output.positions[i] = state.positions[i] + state.positions[i] + derivative.velocities[i] * (dt*dt);
     }
     return output;
+
+    // SUS //
+
+    // TState output;
+    // output.positions = state.positions;
+    // output.velocities = state.velocities;
+
+    // for (int i = 0; i < state.positions.size(); i++) {
+    //     output.positions[i] = state.positions[i] + state.velocities[i]*dt + (0.5f)*derivative.velocities[i]*(dt*dt);
+    // }
+
+    // TState n_derivative = TState(system.ComputeTimeDerivative(output, start_time + dt));
+    // for (int i = 0; i < state.positions.size(); i++) {
+    //     output.velocities[i] = state.velocities[i] + (0.5f)*(derivative.velocities[i] * n_derivative.velocities[i])*dt;
+    // }
+    // return output;
   }
 };
 }  // namespace GLOO
