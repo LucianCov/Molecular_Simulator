@@ -34,6 +34,7 @@ class LennardJonesNode : public SceneNode {
     float step_;
     float time_;
     std::unique_ptr<IntegratorBase<LennardJonesSystem, ParticleState>> integrator_;
+    IntegratorType integrator_type_;
     LennardJonesSystem system_;
 
 };

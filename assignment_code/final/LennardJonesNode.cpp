@@ -22,8 +22,9 @@ namespace GLOO {
     time_ = 0.0;
     integrator_ = IntegratorFactory::CreateIntegrator<LennardJonesSystem, ParticleState>(type);
     system_ = LennardJonesSystem();
+    integrator_type_ = type;
 
-    system_.Set_Force_Model(0.1, 0.1);
+    system_.Set_Force_Model(10.1, 0.1);
     
     for (size_t i = 0; i < state_.positions.size(); i++){
         //need to initialize the system by adding masses and springs
@@ -41,8 +42,10 @@ void LennardJonesNode::Update(double delta_time) {
     auto prev_state = state_;
     for (int _ = 0; _ < std::max(int(delta_time/step_),1); _++){
         state_ = integrator_->Integrate(system_, state_, time_, step_);
-        for (int i = 0; i < state_.positions.size(); i++) {
-            state_.positions[i] = state_.positions[i] - prev_state.positions[i];
+        if (integrator_type_ == IntegratorType::Euler) {
+            for (int i = 0; i < state_.positions.size(); i++) {
+                state_.positions[i] = state_.positions[i] - prev_state.positions[i];
+            }            
         }
         time_ += step_;
         prev_state = state_;
