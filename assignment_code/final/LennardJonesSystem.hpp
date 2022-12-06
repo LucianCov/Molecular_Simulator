@@ -11,6 +11,7 @@ class LennardJonesSystem : ParticleSystemBase {
     std::vector<float> masses_;
     std::vector<Spring> springs_;
     std::vector<bool> fixed_;
+    float k_ = .35;
 
     void Set_Force_Model(float epsilon, float r_min) {
         force_model_ = LennardJones(epsilon, r_min);
@@ -41,6 +42,7 @@ class LennardJonesSystem : ParticleSystemBase {
         for (int i = 0; i < state.positions.size(); i++) {
             // for each particle initialize its total force to 0
             glm::vec3 force = glm::vec3(0.f);
+            force += k_ * state.velocities[i] * -1.f;
             for (int j = 0; j < state.positions.size(); j++) {
                 if (i != j) {
                     // don't want to use the point on itself
