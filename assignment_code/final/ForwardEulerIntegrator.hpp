@@ -17,32 +17,21 @@ class ForwardEulerIntegrator : public IntegratorBase<TSystem, TState> {
     // forward Euler integration.
     // euler is x + f(X)*dt
     // std::cout << "euler integrator integrating" << std::endl;
-    TState derivative = TState(system.ComputeTimeDerivative(state, start_time));
+    TState derivative1 = TState(system.ComputeTimeDerivative(state, start_time));
     // std::cout << "Derivative successfully calculated" << std::endl;
 
     TState output;
     output.velocities = state.velocities;
     output.positions = state.positions;
     for (int i = 0; i < state.positions.size(); i++) {
-        output.positions[i] = state.positions[i] + state.positions[i] + derivative.velocities[i] * (dt*dt);
+        output.positions[i] = state.positions[i] + state.velocities[i]*(dt) + (0.5f)*derivative1.velocities[i] * (dt*dt);
+    }
+
+    TState derivative2 = TState(system.ComputeTimeDerivative(output, start_time + dt));
+    for (int i = 0; i < state.positions.size(); i++) {
+        output.velocities[i] = state.velocities[i] + (0.5f)*(derivative1.velocities[i] + derivative2.velocities[i])*(dt);
     }
     return output;
-
-    // SUS //
-
-    // TState output;
-    // output.positions = state.positions;
-    // output.velocities = state.velocities;
-
-    // for (int i = 0; i < state.positions.size(); i++) {
-    //     output.positions[i] = state.positions[i] + state.velocities[i]*dt + (0.5f)*derivative.velocities[i]*(dt*dt);
-    // }
-
-    // TState n_derivative = TState(system.ComputeTimeDerivative(output, start_time + dt));
-    // for (int i = 0; i < state.positions.size(); i++) {
-    //     output.velocities[i] = state.velocities[i] + (0.5f)*(derivative.velocities[i] * n_derivative.velocities[i])*dt;
-    // }
-    // return output;
   }
 };
 }  // namespace GLOO
