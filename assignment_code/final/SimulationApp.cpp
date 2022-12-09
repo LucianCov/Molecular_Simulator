@@ -56,33 +56,45 @@ void SimulationApp::SetupScene() {
   ParticleState initial_state_molecular = ParticleState();
   std::vector<float> molecule_masses;
   std::vector<glm::vec3> colors;
-  // initial_state_molecular.positions.push_back(glm::vec3(1.f, 0.f, 0.f));
-  // initial_state_molecular.positions.push_back(glm::vec3(1.2f, 0.f, 0.f));
-  // initial_state_molecular.velocities.push_back(glm::vec3(0.f));
-  // initial_state_molecular.velocities.push_back(glm::vec3(0.f));
-  // molecule_masses.push_back(0.5);
-  // molecule_masses.push_back(0.5);
-  for (float i = 1.0; i < 1.2; i += 0.1){
-    for (float j = 0.9; j < 1.2; j += 0.1) {
-      for (float k = 0.9; k < 1.2; k += 0.1) {
-        initial_state_molecular.positions.push_back(glm::vec3(i, j, k));
-        initial_state_molecular.velocities.push_back(glm::vec3(0.f));
-        molecule_masses.push_back(0.5);
-        colors.push_back(glm::vec3(0.9f, 0.2f, 0.1f));
-      }
-    }
-  }
+  initial_state_molecular.positions.push_back(glm::vec3(1.f, 0.f, 0.f));
+  initial_state_molecular.positions.push_back(glm::vec3(1.2f, 0.f, 0.f));
+  initial_state_molecular.velocities.push_back(glm::vec3(0.f));
+  initial_state_molecular.velocities.push_back(glm::vec3(0.f));
+  molecule_masses.push_back(0.5);
+  molecule_masses.push_back(0.5);
+  colors.push_back(glm::vec3(0.9f, 0.2f, 0.1f));
+  // for (float i = 1.0; i < 1.2; i += 0.1){
+  //   for (float j = 0.8; j < 1.2; j += 0.1) {
+  //     for (float k = 0.8; k < 1.2; k += 0.1) {
+  //       initial_state_molecular.positions.push_back(glm::vec3(i, j, k));
+  //       initial_state_molecular.velocities.push_back(glm::vec3(0.f));
+  //       molecule_masses.push_back(0.5);
+  //       colors.push_back(glm::vec3(0.9f, 0.2f, 0.1f));
+  //     }
+  //   }
+  // }
 
-  for (float i = -2.2; i < -2.0; i += 0.1){
-    for (float j = 1.0; j < 1.2; j += 0.1) {
-      for (float k = 1.0; k < 1.2; k += 0.1) {
-        initial_state_molecular.positions.push_back(glm::vec3(i, j-0.05, k-0.05));
-        initial_state_molecular.velocities.push_back(glm::vec3(10.5f, 0.f, 0.f));
-        molecule_masses.push_back(0.5);
-        colors.push_back(glm::vec3(0.1f, 0.4f, 0.9f));
-      }
-    }
-  }
+  // for (float i = -2.2; i < -2.0; i += 0.1){
+  //   for (float j = 1.0; j < 1.2; j += 0.1) {
+  //     for (float k = 1.0; k < 1.2; k += 0.1) {
+  //       initial_state_molecular.positions.push_back(glm::vec3(i, j-0.05, k-0.05));
+  //       initial_state_molecular.velocities.push_back(glm::vec3(6.5f, 0.f, 0.f));
+  //       molecule_masses.push_back(0.5);
+  //       colors.push_back(glm::vec3(0.1f, 0.4f, 0.9f));
+  //     }
+  //   }
+  // }
+
+  // for (float i = 2.0; i < 2.2; i += 0.1){
+  //   for (float j = 1.0; j < 1.2; j += 0.1) {
+  //     for (float k = 1.0; k < 1.2; k += 0.1) {
+  //       initial_state_molecular.positions.push_back(glm::vec3(i, j-0.05, k-0.05));
+  //       initial_state_molecular.velocities.push_back(glm::vec3(-2.5f, 0.f, 0.f));
+  //       molecule_masses.push_back(0.5);
+  //       colors.push_back(glm::vec3(0.1f, 0.4f, 0.9f));
+  //     }
+  //   }
+  // }
 
   // initial_state_molecular.positions.push_back(glm::vec3(-1.f, 1.05f, 1.05f));
   // initial_state_molecular.velocities.push_back(glm::vec3(2.f, 0.f, 0.f));
