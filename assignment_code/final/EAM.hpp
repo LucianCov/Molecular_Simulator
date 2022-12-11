@@ -7,12 +7,14 @@ namespace GLOO {
 class EAM {
   public:
     EAM();
-    EAM(float rho, float phi, float embedding);
-    float CalcForce(glm::vec3 pos1, glm::vec3 pos2) const;
+    EAM(float A, float B, float n);
+    float CalcPotential(glm::vec3 pos1, glm::vec3 pos2) const;
+    float CalcEmbedding(glm::vec3 pos1, glm::vec3 pos2) const;
+    float n_;
+    float A_;
+    float B_;
   private:
-    float rho_;
-    float phi_;
-    float embedding_;
+    
 };
 }  // namespace GLOO
 

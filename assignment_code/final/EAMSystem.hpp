@@ -13,8 +13,8 @@ class EAMSystem : ParticleSystemBase {
     std::vector<bool> fixed_;
     float k_ = .05;
 
-    void Set_Force_Model(float rho, float phi, float embedding) {
-        force_model_ = EAM(rho, phi, embedding);
+    void Set_Force_Model(float A, float B, float n) {
+        force_model_ = EAM(A, B, n);
     }
 
     void AddParticle(float mass){
@@ -41,16 +41,20 @@ class EAMSystem : ParticleSystemBase {
         std::vector<glm::vec3> accelerations;
         for (int i = 0; i < state.positions.size(); i++) {
             // for each particle initialize its total force to 0
-            glm::vec3 force = glm::vec3(0.f);
-            force += k_ * state.velocities[i] * -1.f;
+            glm::vec3 drag = glm::vec3(0.f);
+            drag += k_ * state.velocities[i] * -1.f;
+            glm::vec3 potential = glm::vec3(0.f);
+            glm::vec3 embedding = glm::vec3(0.f);
             for (int j = 0; j < state.positions.size(); j++) {
                 if (i != j) {
                     // don't want to use the point on itself
-                    force += glm::normalize(state.positions[j] - state.positions[i]) * -1.f * force_model_.CalcForce(state.positions[i], state.positions[j]);
-
+                    potential += glm::normalize(state.positions[j] - state.positions[i]) * -1.f * force_model_.CalcPotential(state.positions[i], state.positions[j]);
+                    embedding += glm::normalize(state.positions[j] - state.positions[i]) * -1.f * force_model_.CalcEmbedding(state.positions[i], state.positions[j]);
                 }
             }
-            accelerations.push_back(force/masses_[i]);
+            embedding.x =  force_model_.B_*embedding.x;
+            embedding.y =  force_model_.B_*embedding.y;
+            accelerations.push_back((drag + potential + embedding)/masses_[i]);
         }
         derivative.velocities = accelerations;
         return derivative;
