@@ -48,8 +48,8 @@ class EAMSystem : ParticleSystemBase {
             for (int j = 0; j < state.positions.size(); j++) {
                 if (i != j) {
                     // don't want to use the point on itself
-                    potential += glm::normalize(state.positions[j] - state.positions[i]) * -1.f * force_model_.CalcPotential(state.positions[i], state.positions[j]);
-                    embedding += glm::normalize(state.positions[j] - state.positions[i]) * -1.f * force_model_.CalcEmbedding(state.positions[i], state.positions[j]);
+                    potential += glm::normalize(state.positions[j] - state.positions[i]) * force_model_.CalcPotential(state.positions[i], state.positions[j]);
+                    embedding += glm::normalize(state.positions[j] - state.positions[i]) * force_model_.CalcEmbedding(state.positions[i], state.positions[j]);
                 }
             }
             embedding.x =  force_model_.B_*embedding.x;
