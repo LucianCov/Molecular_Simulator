@@ -20,12 +20,12 @@ namespace GLOO {
     state_ = initial_state;
     step_ = step_size;
     time_ = 0.0;
-    integrator_ = IntegratorFactory::CreateIntegrator<LennardJonesSystem, ParticleState>(type);
-    system_ = LennardJonesSystem();
+    integrator_ = IntegratorFactory::CreateIntegrator<EAMSystem, ParticleState>(type);
+    system_ = EAMSystem();
     integrator_type_ = type;
     colors_ = colors;
 
-    system_.Set_Force_Model(0.5, 0.1);
+    // system_.Set_Force_Model(0.5, 0.1, n);
     
     for (size_t i = 0; i < state_.positions.size(); i++){
         //need to initialize the system by adding masses and springs

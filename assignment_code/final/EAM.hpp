@@ -10,9 +10,9 @@ class EAM {
     EAM(float A, float B, float n);
     float CalcPotential(glm::vec3 pos1, glm::vec3 pos2) const;
     float CalcEmbedding(glm::vec3 pos1, glm::vec3 pos2) const;
-    float n_;
     float A_;
     float B_;
+    float n_;
   private:
     
 };

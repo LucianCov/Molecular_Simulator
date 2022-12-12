@@ -11,7 +11,7 @@ class EAMSystem : ParticleSystemBase {
     std::vector<float> masses_;
     std::vector<Spring> springs_;
     std::vector<bool> fixed_;
-    float k_ = .05;
+    float k_ = 0.f;
 
     void Set_Force_Model(float A, float B, float n) {
         force_model_ = EAM(A, B, n);
