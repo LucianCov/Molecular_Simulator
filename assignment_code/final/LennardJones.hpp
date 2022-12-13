@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 
+#include "ParticleState.hpp"
+
 namespace GLOO {
 class LennardJones {
   public:

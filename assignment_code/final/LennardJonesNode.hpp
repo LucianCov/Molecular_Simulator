@@ -17,13 +17,13 @@ namespace GLOO {
 class LennardJonesNode : public SceneNode {
  public:
   LennardJonesNode(ParticleState initial_state, const std::vector<float>& masses, const std::vector<glm::vec3>& colors, IntegratorType type, float step_size);
-
+  
   void Update(double delta_time) override;
 
  private:
 
     void Initialize();
-
+    
     std::vector<SceneNode*> particle_nodes_;
     std::shared_ptr<VertexObject> sphere_mesh_;  
     std::shared_ptr<VertexObject> segments_;

@@ -4,6 +4,7 @@
 #include "ParticleSystemBase.hpp"
 #include "Spring.hpp"
 #include "LennardJones.hpp"
+#include <fstream>
 
 namespace GLOO {
 class LennardJonesSystem : ParticleSystemBase {
@@ -37,7 +38,8 @@ class LennardJonesSystem : ParticleSystemBase {
 
     ParticleState ComputeTimeDerivative(const ParticleState& state, float time) const{
         ParticleState derivative = ParticleState();
-        derivative.positions = state.velocities;        
+        derivative.positions = state.velocities;
+        float energy = 0;        
         std::vector<glm::vec3> accelerations;
         for (int i = 0; i < state.positions.size(); i++) {
             // for each particle initialize its total force to 0
@@ -47,11 +49,16 @@ class LennardJonesSystem : ParticleSystemBase {
                 if (i != j) {
                     // don't want to use the point on itself
                     force += glm::normalize(state.positions[j] - state.positions[i]) * -1.f * force_model_.CalcForce(state.positions[i], state.positions[j]);
-
+                    energy += force_model_.CalcEnergy(state.positions[i], state.positions[j]);
                 }
             }
+            energy += (0.5)*(0.5)*(pow(glm::length(state.velocities[i]), 2));
             accelerations.push_back(force/masses_[i]);
         }
+        // std::cout << energy << std::endl;
+        std::ofstream File("energy_1.csv", std::ios::app);
+        File << energy << "\n";
+        File.close();
         derivative.velocities = accelerations;
         return derivative;
     }

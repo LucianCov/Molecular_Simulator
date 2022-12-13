@@ -25,7 +25,7 @@ namespace GLOO {
     integrator_type_ = type;
     colors_ = colors;
 
-    system_.Set_Force_Model(0.5, 0.1);
+    system_.Set_Force_Model(0.1, 0.1);
     
     for (size_t i = 0; i < state_.positions.size(); i++){
         //need to initialize the system by adding masses and springs
@@ -43,18 +43,19 @@ void LennardJonesNode::Update(double delta_time) {
     auto prev_state = state_;
     for (int _ = 0; _ < std::max(int(delta_time/step_),1); _++){
         state_ = integrator_->Integrate(system_, state_, time_, step_);
-        if (integrator_type_ == IntegratorType::Euler) {
-            for (int i = 0; i < state_.positions.size(); i++) {
-                state_.positions[i] = state_.positions[i] - prev_state.positions[i];
-            }            
-        }
+        // if (integrator_type_ == IntegratorType::Euler) {
+        //     for (int i = 0; i < state_.positions.size(); i++) {
+        //         state_.positions[i] = state_.positions[i] - prev_state.positions[i];
+        //     }
+        // prev_state = state_;
+        // }
         time_ += step_;
-        prev_state = state_;
-        std::cout << glm::to_string(state_.positions[0]) << std::endl;
+        // prev_state = state_;
     }
     for (size_t i = 0; i < particle_nodes_.size(); i++){
         particle_nodes_[i]->GetTransform().SetPosition(state_.positions[i]);
-    }}
+    }
+    }
 
 void LennardJonesNode::Initialize(){
     for (size_t i = 0; i < state_.positions.size(); i++){
