@@ -16,4 +16,10 @@ namespace GLOO {
         // NOTE: Values can get really small at higher distances, might make sense to truncate
         return 12 * epsilon_ * r_min_/(r*r) * (pow(r_min_/r, 11) - pow(r_min_/r, 5));
     }
+
+    float LennardJones::CalcEnergy(glm::vec3 pos1, glm::vec3 pos2) const {
+        float r = glm::distance(pos1, pos2);
+
+        return epsilon_ * (pow(r_min_/r, 12) - 2 * pow(r_min_/r,6));
+    }
 }
